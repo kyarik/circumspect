@@ -29,7 +29,7 @@ npm install circumspect
 - [`invariant`](#invariant)
 - [`warning`](#warning)
 - [`assertNever`](#assertnever)
-- [`notNull`](#notnull)
+- [`nonNull`](#nonnull)
 
 ### `invariant`
 
@@ -79,10 +79,10 @@ warning(valueToCheck: unknown, message?: string): void
 assertNever(value: never): never
 ```
 
-### `notNull`
+### `nonNull`
 
 ```ts
-notNull<T>(value: T | null | undefined): value is T
+nonNull<T>(value: T | null | undefined): value is T
 ```
 
 ## Optimizations

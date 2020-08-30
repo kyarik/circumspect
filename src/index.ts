@@ -1,4 +1,4 @@
 export { assertNever } from './assertNever';
 export { invariant } from './invariant';
-export { notNull } from './notNull';
+export { nonNull } from './nonNull';
 export { warning } from './warning';
