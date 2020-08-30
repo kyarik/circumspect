@@ -16,7 +16,7 @@ it('issues a warning in development when passed a falsy value', () => {
   warning(false, message);
 
   expect(consoleWarnSpy).toHaveBeenCalledTimes(1);
-  expect(consoleWarnSpy).toHaveBeenCalledWith(expect.stringContaining(message));
+  expect(consoleWarnSpy).toHaveBeenCalledWith(`Warning. ${message}`);
 });
 
 it('does not issue a warning in development when passed a truthy value', () => {
