@@ -4,6 +4,6 @@ export function warning(value: unknown, message: string) {
       return;
     }
 
-    console.error(`Warning. ${message}`);
+    console.warn(`Warning. ${message}`);
   }
 }

@@ -1,11 +1,11 @@
 import { warning } from '..';
 
-const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation();
+const consoleWarnSpy = jest.spyOn(console, 'warn').mockImplementation();
 
 beforeEach(() => {
   global.__DEV__ = false;
 
-  consoleErrorSpy.mockClear();
+  consoleWarnSpy.mockClear();
 });
 
 it('issues a warning in development when passed a falsy value', () => {
@@ -15,10 +15,8 @@ it('issues a warning in development when passed a falsy value', () => {
 
   warning(false, message);
 
-  expect(consoleErrorSpy).toHaveBeenCalledTimes(1);
-  expect(consoleErrorSpy).toHaveBeenCalledWith(
-    expect.stringContaining(message),
-  );
+  expect(consoleWarnSpy).toHaveBeenCalledTimes(1);
+  expect(consoleWarnSpy).toHaveBeenCalledWith(expect.stringContaining(message));
 });
 
 it('does not issue a warning in development when passed a truthy value', () => {
@@ -28,7 +26,7 @@ it('does not issue a warning in development when passed a truthy value', () => {
 
   warning(true, message);
 
-  expect(consoleErrorSpy).not.toHaveBeenCalled();
+  expect(consoleWarnSpy).not.toHaveBeenCalled();
 });
 
 it('does not issue a warning in production whether passed a truthy or falsy value', () => {
@@ -37,5 +35,5 @@ it('does not issue a warning in production whether passed a truthy or falsy valu
   warning(true, message);
   warning(false, message);
 
-  expect(consoleErrorSpy).not.toHaveBeenCalled();
+  expect(consoleWarnSpy).not.toHaveBeenCalled();
 });
