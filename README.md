@@ -26,10 +26,10 @@ npm install circumspect
 
 ## API
 
-- `invariant`
-- `assertNever`
-- `notNull`
-- `warning`
+- [`invariant`](#invariant)
+- [`warning`](#warning)
+- [`assertNever`](#assertnever)
+- [`notNull`](#notnull)
 
 ### `invariant`
 
@@ -67,6 +67,12 @@ user; // If we get here, the type is narrowed to `User`
 
 In this example, the `user` object can potentially be `null` or `undefined` (i.e., falsy). If that's the case, we have an invariant violation, and the `invariant` function will throw. Otherwise, it simply returns and we know that `user` actually points to a user object.
 
+### `warning`
+
+```ts
+warning(valueToCheck: unknown, message?: string): void
+```
+
 ### `assertNever`
 
 ```ts
@@ -77,12 +83,6 @@ assertNever(value: never): never
 
 ```ts
 notNull<T>(value: T | null | undefined): value is T
-```
-
-### `warning`
-
-```ts
-warning(valueToCheck: unknown, message?: string): void
 ```
 
 ## Optimizations
