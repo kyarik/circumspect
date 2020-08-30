@@ -1,10 +1,12 @@
 {
   "name": "circumspect",
+  "version": "0.0.0",
+  "license": "MIT",
   "description": "Set of functions to make your TypeScript/JavaScript code safer",
   "keywords": [
     "assert-never",
     "invariant",
-    "not-null",
+    "non-null",
     "warning"
   ],
   "homepage": "https://github.com/kyarik/circumspect#readme",
@@ -16,8 +18,6 @@
     "url": "https://github.com/kyarik/circumspect/issues"
   },
   "author": "Yaroslav Kukytsyak",
-  "version": "0.1.0",
-  "license": "MIT",
   "files": [
     "dist",
     "src"
