@@ -31,7 +31,7 @@ npm install circumspect
 - `notNull`
 - `warning`
 
-### invariant
+### `invariant`
 
 ```ts
 invariant(value: unknown, message?: string): asserts value
@@ -53,13 +53,11 @@ invariant(value: unknown, message?: string): asserts value
 
 `invariant` should be used whenever we have a value that could potentially be falsy, but we are confident that in a particular circumstance, the value must be truthy. That is, the fact that the value is truthy is an invariant, and if it ever happens that the value is falsy, the invariant has been violated, and thus an error must be thrown.
 
+Since the `message` argument is completely ignored in production, you might want to strip it from your code completely in production builds. To see how to do that, see the [Optimizations](#optimizations) section.
+
 #### Example
 
 ```ts
-interface User {
-  name: string;
-}
-
 declare const user: User | null | undefined;
 
 invariant(user, 'The user is missing!');
@@ -86,6 +84,32 @@ notNull<T>(value: T | null | undefined): value is T
 ```ts
 warning(valueToCheck: unknown, message?: string): void
 ```
+
+## Optimizations
+
+We recommend using [`babel-plugin-dev-expression`](https://www.npmjs.com/package/babel-plugin-dev-expression) to strip the `message` argument passed to `invariant` and to completely remove calls to `warning` in production.
+
+Basically, in production, `babel-plugin-dev-expression` replaces
+
+```ts
+invariant(value, 'Value is falsy!');
+```
+
+with
+
+```ts
+if (!value) {
+  invariant(false);
+}
+```
+
+so the `message` argument is stripped. It also completely removes calls to `warning`. So, lines like this
+
+```ts
+warning(value, 'Value is falsy!');
+```
+
+are removed.
 
 ## Contributing
 
