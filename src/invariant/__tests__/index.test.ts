@@ -19,7 +19,9 @@ it('throws an error containing the custom message in development', () => {
 
   const message = 'Custom error message!';
 
-  expect(() => invariant(false, message)).toThrow(message);
+  expect(() => invariant(false, message)).toThrow(
+    new Error(`Invariant violation. ${message}`),
+  );
 });
 
 it('throws a generic error when no message is passed in development', () => {
