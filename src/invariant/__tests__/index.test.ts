@@ -22,12 +22,17 @@ it('throws an error containing the custom message in development', () => {
   expect(() => invariant(false, message)).toThrow(message);
 });
 
-it('throws a generic error ignoring the custom message in production', () => {
-  global.__DEV__ = false;
+it('throws a generic error when no message is passed in development', () => {
+  global.__DEV__ = true;
 
+  expect(() => invariant(false)).toThrow(new Error('Invariant violation. '));
+});
+
+it('throws a generic error ignoring any custom message in production', () => {
   expect(() => invariant(false, 'Custom error message!')).toThrow(
     new Error('Invariant violation.'),
   );
+  expect(() => invariant(false)).toThrow(new Error('Invariant violation.'));
 });
 
 it('does not throw an error when passed a truthy value', () => {
