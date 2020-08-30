@@ -33,6 +33,7 @@
     "build": "tsdx build",
     "test": "tsdx test",
     "lint": "tsdx lint",
+    "typecheck": "yarn tsc --noEmit",
     "prepare": "tsdx build"
   },
   "peerDependencies": {},
