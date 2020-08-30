@@ -29,5 +29,5 @@ export function invariant(value: unknown, message?: string): asserts value {
     throw new Error(`Invariant violation. ${message || ''}`);
   }
 
-  throw new Error('Invariant violation');
+  throw new Error('Invariant violation.');
 }
