@@ -1,6 +1,6 @@
 {
   "name": "circumspect",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "license": "MIT",
   "description": "Set of functions to make your TypeScript/JavaScript code safer",
   "keywords": [
