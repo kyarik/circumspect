@@ -1,9 +1,9 @@
-export function warning(valueToCheck: unknown, message: string) {
+export function warning(value: unknown, message: string) {
   if (__DEV__) {
-    if (valueToCheck) {
+    if (value) {
       return;
     }
 
-    console.error(`Warning: ${message}`);
+    console.error(`Warning. ${message}`);
   }
 }
