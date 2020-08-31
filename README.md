@@ -4,7 +4,7 @@
 
 ## Why this library exists?
 
-There are many helpful functions that can make your code safer, such as `invariant` and `assertNever`. Many of these functions are available as separate npm packages (for example, [`invariant`](https://www.npmjs.com/package/invariant)). But installing a new package (and most of the time the `@types` counterpart as well) for each function is not very convinient. Also, those packages generally export their functions as default exports, making VSCode auto-import not work well with them.
+There are many helpful functions that can make your code safer, such as `invariant` and `assertNever`. Many of these functions are available as separate npm packages (for example, [`invariant`](https://www.npmjs.com/package/invariant)). But installing a new package (and most of the time the `@types` counterpart as well) for each function is not very convenient. Also, those packages generally export their functions as default exports, making VSCode auto-import not work well with them.
 
 This library unifies the functions that make you code safer into a single place. `circumspect` is a single dependency that has them all. And VSCode auto-import works as expected because all function provided by `circumspect` are named exports.
 
