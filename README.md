@@ -129,6 +129,69 @@ if (!lang) {
 assertNever(value: never): never
 ```
 
+#### Parameters
+
+- `value: never` is the value after all possible union type variants have been exhausted.
+
+#### Return value
+
+- `never` which means that the function never returns; it just throws an error if ever actually called.
+
+#### Description
+
+`assertNever` should be used to ensure that all variants of a union type have been exhausted.
+
+If all union variants of `value` have been exhausted, there is no compiler error when calling `assertNever` with `value`, since `value` is considered to be of type `never` at that point, and at run time, we never reach the point of calling `assertNever`, meaning that no error will be thrown.
+
+However, if not all union variants have been exhaused, then we are calling `assertNever` with something other than `never` and so there will be a compiler error saying something like
+
+```
+Argument of type 'x' is not assignable to parameter of type 'never'.
+```
+
+which we can fix by handling the missing variants. You can read more about [union exhaustiveness checking and `assertNever`](https://www.typescriptlang.org/docs/handbook/unions-and-intersections.html#union-exhaustiveness-checking) in the TypeScript docs.
+
+#### Example
+
+```tsx
+declare const state: 'loading' | 'done' | 'error';
+
+switch (state) {
+  case 'loading':
+    return <Loading />;
+  case 'done':
+    return <Done />;
+  case 'error':
+    return <Error />;
+}
+```
+
+In this example, we handle all possible states inside the `switch` statement: `'loading'`, `'done'`, and `'error'`.
+
+However, what if in the future we add another state, such as `'pending'`?
+
+The fact that the `switch` statement is not handling `'pending'` would be undetected.
+
+The solution is to have a `default` case in which we assert that all possible states have been handled.
+
+```ts
+switch (state) {
+  ...
+  default:
+    return assertNever(state);
+}
+```
+
+So, when all state variants are handled, we get no compile time error. However, when we add the new `'pending'` state, we will get a compiler error saying:
+
+```
+Argument of type 'string' is not assignable to parameter of type 'never'.
+```
+
+We can fix this error by handling the `'pending'` state inside the `switch`.
+
+As you can see from this example, `assertNever` is especially useful in `switch` statements where we want to ensure to have handled all possible cases at all times.
+
 ### `nonNull`
 
 ```ts
