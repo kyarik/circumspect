@@ -41,7 +41,7 @@ invariant(value: unknown, message?: string): asserts value
 
 - `value: unknown` is the value that we want to ensure to be [truthy](https://developer.mozilla.org/en-US/docs/Glossary/truthy).
 
-- `message?: string` is an optional error message that will be part of the error that is thrown in case `value` is [falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy). This message is only displayed in development. In production, only a generic error is shown instead (`'Invariant violation'`) and the `message` parameter is ignored.
+- `message?: string` is an optional error message that will be included in the error that is thrown when the passed `value` is [falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy). This custom error message is displayed only in development. In production, a generic error is shown instead (`'Invariant violation'`) and the `message` parameter is ignored.
 
 #### Return value
 
