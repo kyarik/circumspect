@@ -8,7 +8,6 @@
  * must be truthy. That is, the fact that the value is truthy is an invariant,
  * and if it ever happens that the value is falsy, the invariant has been violated,
  * and thus an error must be thrown.
- *
  * @param value is the value that we want to ensure to be
  *   [truthy](https://developer.mozilla.org/en-US/docs/Glossary/truthy).
  * @param message is an optional error message that will be part of the error that

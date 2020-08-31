@@ -6,7 +6,6 @@
  * `undefined`, or both and we want to check for that and have its type
  * properly narrowed. The name of this function stems from the `NonNullable`
  * utility type, which excludes `null` and `undefined` from a type.
- *
  * @param value is the value that we want to check for not being `null` or
  *   `undefined`.
  * @returns a boolean indicating whether the passed value is neither `null` nor
