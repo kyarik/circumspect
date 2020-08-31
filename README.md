@@ -70,7 +70,57 @@ In this example, the `user` object can potentially be `null` or `undefined` (i.e
 ### `warning`
 
 ```ts
-warning(valueToCheck: unknown, message?: string): void
+warning(value: unknown, message: string): void
+```
+
+#### Parameters
+
+- `value: unknown` is the value that we want to check. If it is [falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy), a warning is issued to the console.
+
+- `message: string` is the warning message that will be written to the console.
+
+#### Return value
+
+- `void` the function doesn't return anything.
+
+#### Description
+
+`warning` issues a warning to the console with the given `message` if the specified `value` is falsy. The warning is issued only in development. In production, this function doesn't do anything.
+
+It should be used whenever we want to issue a development-only warning if some value is falsy, which should help guide developers to fix the non-critical issues being reported in the warning message.
+
+Since `warning` doesn't do anything in production, you might want to remove calls to this function completely from your code in production builds. To see how to do that, see the [Optimizations](#optimizations) section.
+
+#### Examples
+
+```ts
+declare const mode: 'auto' | 'default' | 'slow' | 'fast';
+
+warning(
+  mode !== 'auto',
+  'Mode "auto" has been deprecated. Please use "default" instead.',
+);
+```
+
+In this example, we want to issue a deprecation warning if the `mode` is `'auto'`. To do so, we need to pass a falsy value, that's why we pass `mode !== 'auto'`, which is falsy only when the `mode` is `'auto'`.
+
+In some cases, it makes sense to pass `false` directly. For example:
+
+```ts
+declare const languages: Language[];
+declare const defaultLanguage: Language;
+declare const langName: string;
+
+let lang = languages.find(({ name }) => name === langName);
+
+if (!lang) {
+  warning(
+    false,
+    `Language with name "${langName}" not found. Falling back to the default language.`,
+  );
+
+  lang = defaultLanguage;
+}
 ```
 
 ### `assertNever`
