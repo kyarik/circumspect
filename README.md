@@ -198,6 +198,36 @@ As you can see from this example, `assertNever` is especially useful in `switch`
 nonNull<T>(value: T | null | undefined): value is T
 ```
 
+#### Parameters
+
+- `value: T | null | undefined` is the value that we want to check for not being `null` or `undefined`.
+
+#### Return value
+
+- `value is T` which means that the function returns a boolean indicating whether the passed value is neither `null` nor `undefined`. This narrows the type of `value` to `T` (i.e., excludes `null` and `undefined`) when `true` is returned.
+
+#### Description
+
+`nonNull` is a predicate function that checks whether the specified value is non-null, i.e., neither `null` nor `undefined`. After calling the function, the type of `value` is properly narrowed based on whether `true` or `false` was returned.
+
+`nonNull` should be used whenever we have a value that could potentially be `null`, `undefined`, or both and we want to check for that and have its type properly narrowed.
+
+The name of this function stems from the `NonNullable` utility type, which excludes `null` and `undefined` from a type.
+
+#### Example
+
+```ts
+declare const names: (string | null)[];
+
+const nonNullNames = names.filter(nonNull);
+
+// nonNullNames has type 'string[]'
+```
+
+In this example, we have an array of names that can also include some `null` elements. We filter the array for all non-null elements and get back a `string[]`.
+
+If we instead used `names.filter(x => x !== null)`, we would get back non-null elements, but the type would still be `(string | null)[]` since TypeScript sees the function that we pass to `filter` as just returning a `boolean` and so no type narrowing occurs.
+
 ## Optimizations
 
 We recommend using [`babel-plugin-dev-expression`](https://www.npmjs.com/package/babel-plugin-dev-expression) to strip the `message` argument passed to `invariant` and to completely remove calls to `warning` in production.
